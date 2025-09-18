@@ -1,0 +1,14 @@
+# RStudio 및 macOS 시스템 파일
+.Rproj.user/
+.Rhistory
+.RData
+.Rapp.history
+.DS_Store
+
+# 대용량 데이터 파일
+*.RData
+*.geojson
+*.csv
+people.json
+aed_manual.txt
+report_log.csv

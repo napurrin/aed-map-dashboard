@@ -1,0 +1,48 @@
+
+# =================================================================
+# R Shiny 대시보드용 .dockerignore (필수 파일만 허용하는 방식)
+# =================================================================
+
+# 1. 모든 파일과 폴더를 일단 전부 제외시킵니다.
+*
+
+# 2. Docker 이미지를 만드는 데 꼭 필요한 Dockerfile 자체는 다시 포함시킵니다.
+!Dockerfile
+
+
+# 3. Shiny 앱을 실행하는 핵심 R 스크립트를 포함시킵니다.
+# -----------------------------------------------------------------
+# [선택 1] app.R 파일 하나만 사용하는 경우:
+!app.R
+!server.R
+!global.R
+
+# [선택 2] ui.R / server.R 로 나누어 사용하는 경우 (아래 줄들의 #을 지워주세요):
+# !ui.R
+# !server.R
+# !global.R  # global.R 파일이 있다면 이것도 포함
+
+
+# 4. 앱이 사용하는 데이터 파일 또는 폴더를 포함시킵니다.
+# -----------------------------------------------------------------
+# [예시 1] data 폴더 안의 "processed_data.rds" 파일 하나만 필요한 경우:
+!data/processed_data.rds
+!preprocessed_01.RData
+!preprocessed_02.RData
+!preprocessed_03.RData
+!preprocessed_04.RData
+!preprocessed_05.RData
+!preprocessed_06.RData
+!preprocessed_07.RData
+!preprocessed_08.RData
+!floating_pop_with_location.csv
+!people.json
+!faq_data.csv
+# [예시 2] data 폴더 전체가 필요한 경우:
+# !data/
+
+
+# 5. CSS, 이미지, Javascript 파일이 들어있는 www 폴더를 포함시킵니다.
+# -----------------------------------------------------------------
+# (www 폴더가 프로젝트에 있는 경우에만 #을 지워주세요)
+# !www/

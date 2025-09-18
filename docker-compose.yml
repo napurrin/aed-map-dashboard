@@ -1,0 +1,45 @@
+# docker-compose.yml (최종 버전)
+version: '3.8'
+services:
+  shiny-app-1:
+    build: .
+    image: my-aed-app
+    container_name: shiny-app-1
+    networks:
+      - a-network
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:3838"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+  shiny-app-2:
+    image: my-aed-app
+    container_name: shiny-app-2
+    networks:
+      - a-network
+    depends_on:
+      - shiny-app-1
+  shiny-app-3:
+    image: my-aed-app
+    container_name: shiny-app-3
+    networks:
+      - a-network
+    depends_on:
+      - shiny-app-1
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - a-network
+    depends_on:
+      shiny-app-1:
+        condition: service_healthy
+networks:
+  a-network:
+    driver: bridge
