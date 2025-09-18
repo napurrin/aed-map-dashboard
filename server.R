@@ -31,7 +31,17 @@ library(rmarkdown)
 # ===================================================================
 server <- function(input, output, session) {
   
-  
+  # [수정된 최종 코드] 모바일 접속 시, 사이드바 토글 버튼을 강제로 '클릭'하여 닫습니다.
+  shinyjs::runjs("
+    setTimeout(function() {
+      if (window.innerWidth < 768) {
+        var sidebarToggle = document.querySelector('[data-bs-toggle=\"sidebar\"]');
+        if (sidebarToggle) {
+          sidebarToggle.click();
+        }
+      }
+    }, 250);
+  ")
   
   # [핵심 추가] 시작 시 안내 화면(로딩 스크린) 로직
   # 1. 안내 화면에 표시할 HTML 내용 만들기
@@ -54,14 +64,7 @@ server <- function(input, output, session) {
   
   
   
-  # 세션이 시작될 때 한 번만 실행
-  shinyjs::runjs("
-  setTimeout(function() {
-    if (window.innerWidth < 768) {
-      $('#sidebar-toggle-checkbox').prop('checked', false); // true -> false 로 변경
-    }
-  }, 150);
-")
+
   
   # 2. 앱이 처음 시작될 때 바로 안내 화면을 보여줌
   waiter_show_on_load(

@@ -1283,7 +1283,7 @@ start_screen_ui <- div(id = "start_screen",
                        div(
                          # [수정된 부분] h1 태그 안에 span으로 v2 추가
                          h1("Smart AED Dashboard ", 
-                            tags$span("v2.0", style = "font-size: 0.6em; vertical-align: middle; color: #ffc107;"), 
+                            tags$span("v2.1", style = "font-size: 0.6em; vertical-align: middle; color: #ffc107;"), 
                             style = "color: white; text-align: center;"),
                          br(),
                          actionButton("start_app_btn", "대시보드 시작하기", class = "btn-primary btn-lg")
@@ -1388,7 +1388,6 @@ tab_map_ui <- tabPanel("지도 현황", value = "map_tab", icon = icon("map-loca
                                  p(tags$b("지도 제어:"), " 왼쪽 사이드바 메뉴로 원하는 지역을 필터링하거나 표시 유형(클러스터, 히트맵 등)을 변경할 수 있습니다."),
                                  p(tags$b("상세 정보:"), " 지도 위의 마커나 지역을 클릭하면 상세 정보를 보거나 해당 지역으로 확대할 수 있습니다."),
                                  p(tags$b("내 주변 자원 찾기:"), " '내 주변 찾기' 버튼을 누른 후 지도에 원하는 위치를 클릭하면, 가장 가까운 AED와 응급의료기관 정보를 거리, 예상 시간과 함께 보여줍니다."),
-                                 p(tags$b("지도 정보 확장:"), " 지도 컨트롤 패널에서 '응급의료기관', '서비스 반경', '유동인구' 등을 선택하여 지도 위에 다양한 정보를 겹쳐볼 수 있습니다."),
                                  
                                  
                                  div(style="text-align: center; margin-top: 20px;",
