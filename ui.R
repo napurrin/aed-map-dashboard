@@ -458,7 +458,15 @@ h6 { font-size: 0.9rem; }
   }
 }
 
+/* www/styles.css 파일에 추가 */
 
+/* 화면 너비가 768px 미만일 때 (모바일 환경) */
+@media (max-width: 767.98px) {
+  /* 데스크톱용 범례(.desktop-legend)를 완전히 숨김 처리 */
+  .leaflet-control-container .info.legend.desktop-legend {
+    display: none !important;
+  }
+}
 
 
 
@@ -1371,12 +1379,18 @@ tab_map_ui <- tabPanel("지도 현황", value = "map_tab", icon = icon("map-loca
                            shinyjs::hidden(
                              div(id = "loading_banner",
                                  style = "position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
-                                          padding: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-top: 1px solid #ddd;
-                                          z-index: 1001; text-align: left; font-size: 1.1em;",
-                                 tags$h4("Smart AED 대시보드 활용법", style = "font-weight: 600; text-align: center; margin-bottom: 15px;"),
+                         padding: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-top: 1px solid #ddd;
+                         z-index: 1001; text-align: left; font-size: 1.0em; max-height: 80vh; overflow-y: auto;", # 스타일 수정
+                                 
+                                 tags$h4("Smart AED 대시보드 활용법 🗺️", style = "font-weight: 600; text-align: center; margin-bottom: 15px;"),
+                                 
+                                 # --- 기본 기능 ---
                                  p(tags$b("지도 제어:"), " 왼쪽 사이드바 메뉴로 원하는 지역을 필터링하거나 표시 유형(클러스터, 히트맵 등)을 변경할 수 있습니다."),
                                  p(tags$b("상세 정보:"), " 지도 위의 마커나 지역을 클릭하면 상세 정보를 보거나 해당 지역으로 확대할 수 있습니다."),
-                                 p(tags$b("모바일:"), " 스마트폰에서는 두 손가락으로 지도를 확대/축소하고, 사이드바를 클릭하여 메뉴를 열고 닫을 수 있습니다."),
+                                 p(tags$b("내 주변 자원 찾기:"), " '내 주변 찾기' 버튼을 누른 후 지도에 원하는 위치를 클릭하면, 가장 가까운 AED와 응급의료기관 정보를 거리, 예상 시간과 함께 보여줍니다."),
+                                 p(tags$b("지도 정보 확장:"), " 지도 컨트롤 패널에서 '응급의료기관', '서비스 반경', '유동인구' 등을 선택하여 지도 위에 다양한 정보를 겹쳐볼 수 있습니다."),
+                                 
+                                 
                                  div(style="text-align: center; margin-top: 20px;",
                                      actionButton("close_banner_btn", "확인하고 지도 보기", icon = icon("check"), class = "btn-primary")
                                  )

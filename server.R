@@ -50,11 +50,15 @@ server <- function(input, output, session) {
     )
   )
   
+  
+  
+  
+  
   # 세션이 시작될 때 한 번만 실행
   shinyjs::runjs("
   setTimeout(function() {
     if (window.innerWidth < 768) {
-      $('#sidebar-toggle-checkbox').prop('checked', true);
+      $('#sidebar-toggle-checkbox').prop('checked', false); // true -> false 로 변경
     }
   }, 150);
 ")
@@ -142,7 +146,8 @@ server <- function(input, output, session) {
           tags$li(strong("지도 현황:"), " 전국 AED 분포를 지도에서 확인하고 필터링합니다."),
           tags$li(strong("세부 현황 분석:"), " 선택한 지역의 장비 상태, 점검률 등 상세 통계를 봅니다."),
           tags$li(strong("상세 분석 (탭 메뉴):"), " 유동인구, 접근성 등 고급 분석을 수행합니다."),
-          tags$li(strong("통계 리포트:"), " 지역별/유형별 통계 데이터를 표 형태로 다운로드합니다.")
+          tags$li(strong("통계 리포트:"), " 지역별/유형별 통계 데이터를 표 형태로 다운로드합니다."),
+          tags$li(strong("AED 범례:"), " 범례는 PC환경에서만 확인할 수 있으며, AED의 상태에 따라 색상 진하기로 표현되거나 색상별로 상태를 나타냅니다."),
         ),
         easyClose = TRUE,
         footer = modalButton("확인")
@@ -2725,6 +2730,8 @@ server <- function(input, output, session) {
   })
   
   
+  
+  
   # --- 12. 스마트 분류 어시스턴트 탭 로직 ---
   debounced_query <- reactive(input$assistant_query) %>% debounce(500)
   
@@ -3220,25 +3227,7 @@ server <- function(input, output, session) {
   
   
   
-  # [추가] 범례 상태에 따라 모바일용 '범례 보기' 버튼을 동적으로 제어
-  observe({
-    proxy <- leafletProxy("map")
-    if (is_legend_active()) {
-      # 범례가 활성화되면 버튼 추가
-      proxy %>% addControl(
-        html = tags$button(
-          id = "show-legend-modal-btn",
-          class = "leaflet-bar leaflet-control leaflet-control-custom",
-          "범례 보기"
-        ),
-        position = "bottomright",
-        layerId = "mobile_legend_button" # 버튼에 고유 ID 부여
-      )
-    } else {
-      # 범례가 비활성화되면 버튼 제거
-      proxy %>% removeControl("mobile_legend_button")
-    }
-  })
+
   
   
   
