@@ -125,13 +125,14 @@ shinyjs.init = function() {
         Shiny.setInputValue('map_resize_trigger', Math.random(), {priority: 'event'});
       }
 
-      // 모바일에서 가로 모드 시 사이드바 자동 닫기
-      if (window.isMobile && window.innerWidth < 768) {
-        $('#sidebar-toggle-checkbox').prop('checked', true);
-      }
-    }, 100);
-  });
-};
+  // [수정된 버전]
+  // 앱이 시작되고 모든 요소가 자리를 잡을 시간을 조금 더 줍니다.
+  setTimeout(function() {
+    if (window.isMobile && window.innerWidth < 768) {
+      // 사이드바를 숨기기 위해 체크박스를 'checked' 상태로 만듭니다.
+      $('#sidebar-toggle-checkbox').prop('checked', true);
+    }
+  }, 300); // 지연 시간을 100ms에서 300ms로 늘려 안정성을 높입니다.
 
 // 시작 화면 제거 개선
 $(document).on('click', '#start_app_btn', function() {
@@ -1277,7 +1278,7 @@ start_screen_ui <- div(id = "start_screen",
                        div(
                          # [수정된 부분] h1 태그 안에 span으로 v2 추가
                          h1("Smart AED Dashboard ", 
-                            tags$span("v2.2", style = "font-size: 0.6em; vertical-align: middle; color: #ffc107;"), 
+                            tags$span("v2.3", style = "font-size: 0.6em; vertical-align: middle; color: #ffc107;"), 
                             style = "color: white; text-align: center;"),
                          br(),
                          actionButton("start_app_btn", "대시보드 시작하기", class = "btn-primary btn-lg")

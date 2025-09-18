@@ -31,16 +31,7 @@ library(rmarkdown)
 # ===================================================================
 server <- function(input, output, session) {
   
-  # [수정된 최종 코드] 모바일 접속 시, 사이드바를 확실하게 닫는 로직
-  # 앱이 시작되고 UI가 완전히 그려진 후(250ms 지연) 실행하여 안정성을 확보합니다.
-  shinyjs::delay(250, {
-    shinyjs::runjs(
-      "if (window.innerWidth < 768) {
-         // UI.R에 정의된 숨김용 체크박스를 '체크된' 상태로 만들어 사이드바를 닫습니다.
-         $('#sidebar-toggle-checkbox').prop('checked', true);
-       }"
-    )
-  })
+
   
   # [핵심 추가] 시작 시 안내 화면(로딩 스크린) 로직
   # 1. 안내 화면에 표시할 HTML 내용 만들기
