@@ -46,13 +46,7 @@ shinyjs.init = function() {
   // 모바일 감지
   window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  // [핵심 수정] setTimeout으로 감싸서 안정적으로 실행되도록 변경
-  setTimeout(function() {
-    // 모바일에서 사이드바 자동 접기
-    if (window.isMobile && window.innerWidth < 768) {
-      $('#sidebar-toggle-checkbox').prop('checked', true);
-    }
-  }, 100); // 0.1초 후에 실행
+
   
   
 
@@ -1283,7 +1277,7 @@ start_screen_ui <- div(id = "start_screen",
                        div(
                          # [수정된 부분] h1 태그 안에 span으로 v2 추가
                          h1("Smart AED Dashboard ", 
-                            tags$span("v2.1", style = "font-size: 0.6em; vertical-align: middle; color: #ffc107;"), 
+                            tags$span("v2.2", style = "font-size: 0.6em; vertical-align: middle; color: #ffc107;"), 
                             style = "color: white; text-align: center;"),
                          br(),
                          actionButton("start_app_btn", "대시보드 시작하기", class = "btn-primary btn-lg")
